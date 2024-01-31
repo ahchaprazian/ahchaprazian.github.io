@@ -5,7 +5,6 @@
   background-size: 600% 100%;
   position: relative;
   animation: gradientAnimation 100s infinite;
-  z-index: 0; /* Set z-index to be below other elements */
 }
 
 @keyframes gradientAnimation {
@@ -30,7 +29,6 @@
   height: 100%;
   pointer-events: none;
   animation: floatingDots 15s infinite linear;
-  z-index: 1; /* Set z-index higher than the background */
 }
 
 @keyframes floatingDots {
@@ -52,7 +50,6 @@
   height: 100%;
   pointer-events: none;
   animation: carbonation 100s infinite linear;
-  z-index: 1; /* Set z-index higher than the background */
 }
 
 @keyframes carbonation {
@@ -70,7 +67,6 @@
   width: 100%;
   height: 100%;
   overflow: hidden;
-  z-index: 0; /* Set z-index to be below other elements */
 }
 
 /* Add this CSS for the dots */
@@ -82,7 +78,6 @@
   border-radius: 50%;
   opacity: 0;
   animation: drawDots 20s linear infinite;
-  z-index: 0; /* Set z-index to be below other elements */
 }
 
 @keyframes drawDots {
@@ -96,55 +91,6 @@
   }
 }
 
-/* text css above hero image */
-.hero_title,
-.hero_subtitle {
-  z-index: 2; /* Set z-index higher than dots */
-}
-
-/* about section image css */
-.imageAboutPage {
-  width: 100%;
-  z-index: 2; /* Set z-index higher than dots */
-}
-
-#tech-stack {
-  text-align: center;
-  z-index: 2; /* Set z-index higher than dots */
-}
-
-/* Add this media query to prevent the navbar from collapsing */
-@media (max-width: 767.98px) {
-  #navbarSupportedContent {
-      display: flex !important;
-      flex-direction: row;
-      justify-content: flex-start;
-      z-index: 2; /* Set z-index higher than dots */
-  }
-}
-
-
-
-
-
-
-
-
-/* hero background image 
-.bgimage {
-    height:100vh;
-    background: url('images/background.jpg');
-    background-size:cover;
-    position:relative;
-}
-
-/*.navbar {
-    background-color: transparent;
-}*/
-
-
-/* Add this custom CSS to align the navbar items to the left */
-/* Add this custom CSS to align the navbar items to the left and prevent stacking */
 #navbarNav {
     display: flex;
     flex-direction: row;
