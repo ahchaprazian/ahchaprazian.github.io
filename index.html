@@ -62,48 +62,66 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            const introSection = document.getElementById('home');
-            const dotContainer = document.createElement('div');
-            dotContainer.className = 'dot-container';
-            introSection.appendChild(dotContainer);
-    
-            const maxDots = 100;
-            const dotInterval = 1000;
-    
-            function createDot() {
-                const dot = document.createElement('div');
-                dot.className = 'dot';
-                dotContainer.appendChild(dot);
-    
-                const x = Math.random() * introSection.offsetWidth;
-                const y = Math.random() * introSection.offsetHeight;
-                dot.style.left = `${x}px`;
-                dot.style.top = `${y}px`;
-    
-                const dotCheckInterval = setInterval(() => {
-                    const dotRect = dot.getBoundingClientRect();
-                    if (dotRect.top < 0) {
-                        dot.remove();
-                        clearInterval(dotCheckInterval);
+        const introSection = document.getElementById('home');
+        const dotContainer = document.createElement('div');
+        dotContainer.className = 'dot-container';
+        introSection.appendChild(dotContainer);
+
+        const maxDots = 100;
+        const dotInterval = 1000;
+        const dotSpeed = 2; // pixels per interval
+
+        const dots = [];
+
+        function createDot() {
+            const dot = document.createElement('div');
+            dot.className = 'dot';
+            dotContainer.appendChild(dot);
+            dots.push(dot);
+
+            const x = Math.random() * introSection.offsetWidth;
+            const y = Math.random() * introSection.offsetHeight;
+            dot.style.left = `${x}px`;
+            dot.style.top = `${y}px`;
+
+            moveDot(dot);
+        }
+
+        function moveDot(dot) {
+            const moveInterval = setInterval(() => {
+                const x = parseFloat(dot.style.left);
+                const y = parseFloat(dot.style.top);
+                const newX = x + (Math.random() - 0.5) * dotSpeed;
+                const newY = y + (Math.random() - 0.5) * dotSpeed;
+                dot.style.left = `${newX}px`;
+                dot.style.top = `${newY}px`;
+
+                const dotRect = dot.getBoundingClientRect();
+                if (dotRect.top < -50 || dotRect.left < -50 || dotRect.right > window.innerWidth + 50 || dotRect.bottom > window.innerHeight + 50) {
+                    dot.remove();
+                    clearInterval(moveInterval);
+                    const index = dots.indexOf(dot);
+                    if (index !== -1) {
+                        dots.splice(index, 1);
                     }
-                }, 100);
-            }
-    
-            function createDots() {
-                const currentDots = document.querySelectorAll('.dot').length;
-    
-                if (currentDots < maxDots) {
-                    const remainingDots = maxDots - currentDots;
-                    for (let i = 0; i < remainingDots; i++) {
-                        createDot();
-                    }
+                    createDot(); // Immediately create a new dot
+                }
+            }, 100);
+        }
+
+        function createDots() {
+            if (dots.length < maxDots) {
+                const remainingDots = maxDots - dots.length;
+                for (let i = 0; i < remainingDots; i++) {
+                    createDot();
                 }
             }
-    
-            createDots();
-    
-            setInterval(createDots, dotInterval);
-        });
+        }
+
+        createDots();
+
+        setInterval(createDots, dotInterval);
+    });
     </script>
     
     
@@ -360,6 +378,19 @@
                             <h4 class="portfolio-title">Maze Solver</h4>
                             <p class="portfolio-description">AI maze generation and solver</p>
                             <a href="https://github.com/ahchaprazian/maze-solver" class="portfolio-link" target="_blank">View Project</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 mt-4">
+                <div class="card">
+                    <div class="portfolio-image">
+                        <img class="card-img-top" src="images/web-crawlers.jpg" alt="Card image" style="width:100%">
+                        <div class="portfolio-overlay">
+                            <h4 class="portfolio-title">Web Crawler</h4>
+                            <p class="portfolio-description">WPI: Web crawler and report generator</p>
+                            <a href="https://github.com/ahchaprazian/web-crawler" class="portfolio-link" target="_blank">View Project</a>
                         </div>
                     </div>
                 </div>
